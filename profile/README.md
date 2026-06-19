@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/logo.png" width="250" alt="Autonomic AI Logo" />
+  <img src="https://raw.githubusercontent.com/autonomic-ai-dev/.github/master/assets/logo.png" width="250" alt="Autonomic AI Logo" />
   <h1>🧬 Autonomic AI</h1>
   <p><b>The Unix Philosophy applied to Autonomous Software Engineering.</b></p>
   <p><i>Structure beats intelligence. Deterministic execution over probabilistic hallucination. Built entirely in Rust.</i></p>
