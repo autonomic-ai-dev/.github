@@ -25,17 +25,17 @@ By providing mathematically strict workflow structures and perfectly precise mem
 Our stack is completely decoupled. You do not need to adopt the whole body to use the organs. 
 
 ### The Core Triad
-* **[`agent-brain`](#)** — *The Memory Layer.* A low-latency Rust context router. Instead of "Mega-prompts," it uses a local SQLite + filterable HNSW vector index to route only the exact ~500 tokens of context strictly required for the current micro-task. 
-* **[`agent-spine`](#)** — *The Execution Layer.* A deterministic orchestration engine. It parses declarative YAML workflows into massive parallel DAGs using `tokio`. It features immutable state-transition logs for time-travel debugging and strict Human-in-the-Loop (HITL) approval gates.
-* **[`agent-heart`](#)** — *The Background Pulse.* A background daemon that dynamically allocates API budgets, enforces global safety rules (blocking destructive bash commands at the AST layer), and runs cron jobs for memory distillation.
+* **[`agent-brain`](https://github.com/autonomic-ai-dev/agent-brain)** — *The Memory Layer.* A low-latency Rust context router. Instead of "Mega-prompts," it uses a local SQLite + filterable HNSW vector index to route only the exact ~500 tokens of context strictly required for the current micro-task. 
+* **[`agent-spine`](https://github.com/autonomic-ai-dev/agent-spine)** — *The Execution Layer.* A deterministic orchestration engine. It parses declarative YAML workflows into massive parallel DAGs using `tokio`. It features immutable state-transition logs for time-travel debugging and strict Human-in-the-Loop (HITL) approval gates.
+* **[`agent-heart`](https://github.com/autonomic-ai-dev/agent-heart)** — *The Background Pulse.* A background daemon that dynamically allocates API budgets, enforces global safety rules (blocking destructive bash commands at the AST layer), and runs cron jobs for memory distillation.
 
 ### The Ecosystem (Peripherals)
-* **[`agent-immune`](#)** — Dependency fuzzing, AST linting, and sandboxed Firecracker/Docker execution to ensure generated code is perfectly safe.
-* **[`agent-eyes`](#)** — Playwright-based visual QA and a LangSmith-style real-time observability dashboard.
-* **[`agent-nerves`](#)** — Distributed `nats.rs` pub/sub event bus for asynchronous, multi-node agent communication.
-* **[`agent-muscle`](#)** — Remote actuators handling massive local compilations, Kubernetes execution, and local LoRA model fine-tuning.
-* **[`agent-mouth`](#)** — The communication layer translating complex JSON workflow states into human-readable Slack/Discord summaries and ChatOps triggers.
-* **[`agent-body`](#)** — The sovereign meta-framework, shared `core` crate, and unified CLI installer that binds all organs together.
+* **[`agent-immune`](https://github.com/autonomic-ai-dev/agent-immune)** — Dependency fuzzing, AST linting, and sandboxed Firecracker/Docker execution to ensure generated code is perfectly safe.
+* **[`agent-eyes`](https://github.com/autonomic-ai-dev/agent-eyes)** — Playwright-based visual QA and a LangSmith-style real-time observability dashboard.
+* **[`agent-nerves`](https://github.com/autonomic-ai-dev/agent-nerves)** — Distributed `nats.rs` pub/sub event bus for asynchronous, multi-node agent communication.
+* **[`agent-muscle`](https://github.com/autonomic-ai-dev/agent-muscle)** — Remote actuators handling massive local compilations, Kubernetes execution, and local LoRA model fine-tuning.
+* **[`agent-mouth`](https://github.com/autonomic-ai-dev/agent-mouth)** — The communication layer translating complex JSON workflow states into human-readable Slack/Discord summaries and ChatOps triggers.
+* **[`agent-body`](https://github.com/autonomic-ai-dev/agent-body)** — The sovereign meta-framework, shared `core` crate, and unified CLI installer that binds all organs together.
 
 ---
 
