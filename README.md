@@ -22,6 +22,40 @@ By providing mathematically strict workflow structures and perfectly precise mem
 
 ## 🫀 The Architecture (The Anatomy)
 
+```mermaid
+flowchart TD
+    subgraph Meta
+        body["agent-body<br>Unified CLI & Framework"]
+    end
+
+    subgraph Core Triad
+        brain["agent-brain<br>Memory Layer & Context"]
+        spine["agent-spine<br>Execution Engine"]
+        heart["agent-heart<br>Background Pulse"]
+    end
+
+    subgraph Ecosystem Peripherals
+        nerves["agent-nerves<br>Event Bus"]
+        muscle["agent-muscle<br>Remote Actuators"]
+        immune["agent-immune<br>Security Scanning"]
+        eyes["agent-eyes<br>Visual QA"]
+        mouth["agent-mouth<br>Slack Comm & Approvals"]
+    end
+
+    body --> brain
+    body --> spine
+    body --> heart
+    
+    brain <--> nerves
+    spine <--> nerves
+    heart <--> nerves
+    
+    nerves <--> muscle
+    nerves <--> immune
+    nerves <--> eyes
+    nerves <--> mouth
+```
+
 Our stack is completely decoupled. You do not need to adopt the whole body to use the organs. 
 
 ### The Core Triad
