@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/autonomic-ai-dev/.github/master/assets/logo.png" width="250" alt="Autonomic AI Logo" />
-  <h1>🧬 Autonomic AI</h1>
-  <p><b>The Unix Philosophy applied to Autonomous Software Engineering.</b></p>
+  <h1>☸️ Autonomic AI</h1>
+  <p><b>Kubernetes for AI agents — cloud-native infrastructure for autonomous software engineering.</b></p>
   <p><i>Structure beats intelligence. Deterministic execution over probabilistic hallucination. Built entirely in Rust.</i></p>
 </div>
 
@@ -13,29 +13,31 @@ The current generation of autonomous AI agents (Devin, AutoGPT, LangGraph) suffe
 2. **Context Collapse:** Pushing 100K+ tokens of conversation history into a single prompt leads to severe "Lost in the Middle" syndrome, infinite hallucination loops, and astronomical API costs.
 3. **Zero Data Sovereignty:** Enterprise engineering teams legally cannot send proprietary, unreleased source code to third-party cloud agents. 
 
-## ⚡ The Solution: Biological Separation of Concerns
-**Autonomic AI** rejects the monolith. We treat AI architecture like biological evolution: discrete, highly-specialized organs communicating over strict, type-safe interfaces (MCP). 
+## ⚡ The Solution: Cloud-Native Separation of Concerns
+**Autonomic AI** rejects the monolith. We treat agent architecture like cloud-native infrastructure: discrete, specialized daemons communicating over strict, type-safe interfaces (MCP, NATS, HTTP health).
 
-By providing mathematically strict workflow structures and perfectly precise memory retrieval, we enable **tiny, highly quantized local models (like 1.5B or 8B parameters)** to achieve the same execution reliability as massive $1,000/month cloud agents. All while remaining 100% local, private, and sovereign.
+By providing deterministic workflows and precise memory retrieval, we enable **tiny local models** to match the execution reliability of massive cloud agents — 100% local, private, and sovereign.
+
+[Platform mapping →](https://github.com/autonomic-ai-dev/agent-body/blob/master/docs/cloud-native-platform.md)
 
 ---
 
-## 🫀 The Architecture (The Anatomy)
+## ☸️ The Platform Stack
 
-Our stack is completely decoupled. You do not need to adopt the whole body to use the organs. 
+Our stack is composable. Adopt one component or the full control plane.
 
-### The Core Triad
-* **[`agent-brain`](https://github.com/autonomic-ai-dev/agent-brain)** — *The Memory Layer.* A low-latency Rust context router. Instead of "Mega-prompts," it uses a local SQLite + filterable HNSW vector index to route only the exact ~500 tokens of context strictly required for the current micro-task. 
-* **[`agent-spine`](https://github.com/autonomic-ai-dev/agent-spine)** — *The Execution Layer.* A deterministic orchestration engine. It parses declarative YAML workflows into massive parallel DAGs using `tokio`. It features immutable state-transition logs for time-travel debugging and strict Human-in-the-Loop (HITL) approval gates.
-* **[`agent-heart`](https://github.com/autonomic-ai-dev/agent-heart)** — *The Background Pulse.* A background daemon that dynamically allocates API budgets, enforces global safety rules (blocking destructive bash commands at the AST layer), and runs cron jobs for memory distillation.
+### Control plane & data plane
+* **[`agent-body`](https://github.com/autonomic-ai-dev/agent-body)** — *Control plane.* Agent OS: `autonomic` CLI, supervisor, unified `~/.autonomic/` workspace.
+* **[`agent-brain`](https://github.com/autonomic-ai-dev/agent-brain)** — *Memory store.* SQLite + HNSW routing; ~500 tokens per turn instead of mega-prompts.
+* **[`agent-spine`](https://github.com/autonomic-ai-dev/agent-spine)** — *Workflow engine.* YAML DAGs, immutable snapshots, HITL gates.
+* **[`agent-heart`](https://github.com/autonomic-ai-dev/agent-heart)** — *Controller / GC.* Token budgets and scheduled memory maintenance.
 
-### The Ecosystem (Peripherals)
-* **[`agent-immune`](https://github.com/autonomic-ai-dev/agent-immune)** — Dependency fuzzing, AST linting, and sandboxed Firecracker/Docker execution to ensure generated code is perfectly safe.
-* **[`agent-eyes`](https://github.com/autonomic-ai-dev/agent-eyes)** — Playwright-based visual QA and a LangSmith-style real-time observability dashboard.
-* **[`agent-nerves`](https://github.com/autonomic-ai-dev/agent-nerves)** — Distributed `nats.rs` pub/sub event bus for asynchronous, multi-node agent communication.
-* **[`agent-muscle`](https://github.com/autonomic-ai-dev/agent-muscle)** — Remote actuators handling massive local compilations, Kubernetes execution, and local LoRA model fine-tuning.
-* **[`agent-mouth`](https://github.com/autonomic-ai-dev/agent-mouth)** — The communication layer translating complex JSON workflow states into human-readable Slack/Discord summaries and ChatOps triggers.
-* **[`agent-body`](https://github.com/autonomic-ai-dev/agent-body)** — The sovereign meta-framework, shared `core` crate, and unified CLI installer that binds all organs together.
+### Mesh, runtime, policy, observability
+* **[`agent-nerves`](https://github.com/autonomic-ai-dev/agent-nerves)** — *Service mesh.* NATS JetStream event bus.
+* **[`agent-muscle`](https://github.com/autonomic-ai-dev/agent-muscle)** — *Execution runtime.* Sandboxed commands and training jobs.
+* **[`agent-immune`](https://github.com/autonomic-ai-dev/agent-immune)** — *Admission policy.* OSV scan and sandboxed execution.
+* **[`agent-eyes`](https://github.com/autonomic-ai-dev/agent-eyes)** — *Observability.* DOM index, capture, visual QA.
+* **[`agent-mouth`](https://github.com/autonomic-ai-dev/agent-mouth)** — *Ingress / gateway.* AST validation, Slack approvals, notifications.
 
 ---
 
@@ -47,7 +49,7 @@ Our stack is completely decoupled. You do not need to adopt the whole body to us
 
 ---
 
-## 🤝 The Organism
-Autonomic AI is completely open-source. Because of our strict separation of concerns, the codebase remains remarkably clean and approachable. You do not need to understand the DAG orchestration engine (`spine`) to optimize the vector search (`brain`). 
+## 🤝 The Platform
+Autonomic AI is open source and composable. You do not need the full stack to adopt one component — e.g. optimize vector search in `agent-brain` without touching the workflow engine.
 
 We are building the sovereign software engineer of the future.
