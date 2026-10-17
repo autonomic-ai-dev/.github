@@ -5,7 +5,7 @@
   <p><i>Structure beats intelligence. Deterministic execution over probabilistic hallucination. Zero telemetry. Built in Rust.</i></p>
 
   <p>
-    <a href="https://github.com/autonomic-ai-dev/agent-body/releases"><img src="https://img.shields.io/badge/Release-v1.0.0--beta.2-00f2fe?style=flat-square&logo=github&logoColor=white" alt="Release v1.0.0-beta.2"></a>
+    <a href="https://github.com/autonomic-ai-dev/agent-body/releases"><img src="https://img.shields.io/badge/Release-v1.0.0--beta.3-00f2fe?style=flat-square&logo=github&logoColor=white" alt="Release v1.0.0-beta.3"></a>
     <a href="https://github.com/autonomic-ai-dev/homebrew-tap"><img src="https://img.shields.io/badge/Homebrew-autonomic--stack-10b981?style=flat-square&logo=homebrew&logoColor=white" alt="Homebrew"></a>
     <a href="https://rust-lang.org"><img src="https://img.shields.io/badge/Rust-2024%20%2F%202021-ea580c?style=flat-square&logo=rust&logoColor=white" alt="Rust"></a>
     <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/Protocol-MCP%20Gateway-6366f1?style=flat-square" alt="MCP"></a>
@@ -30,7 +30,7 @@ The first wave of autonomous AI agents (Devin, AutoGPT, Python multi-agent frame
 
 **Autonomic AI** replaces the brittle monolith with an **11-organ biological mesh**. Each organ is a high-performance, single-purpose binary written in pure Rust that communicates through standard **Model Context Protocol (MCP)** and a local **NATS JetStream** event bus.
 
-By combining deterministic DAG workflows with precise, semantic memory filtering, we enable **tiny, local quantized models (1.5B–8B params)** to match or outperform massive $1,000/month cloud agents — running **100% locally on your workstation**.
+By combining deterministic DAG workflows with precise, semantic memory filtering, Autonomic AI provides a structured, predictable multi-agent runtime optimized for local Apple Silicon and Linux execution with bounded token context and zero external telemetry.
 
 ---
 
@@ -85,7 +85,7 @@ flowchart TD
 | Organ | Role | Technology | Primary Commands / Interfaces |
 | :--- | :--- | :--- | :--- |
 | **[`agent-body`](https://github.com/autonomic-ai-dev/agent-body)** | Organ supervisor, multi-host installer & unified MCP gateway | Rust, `rmcp` 1.7, tokio | `autonomic start`, `agent-body install --all`, `agent-body doctor` |
-| **[`agent-brain`](https://github.com/autonomic-ai-dev/agent-brain)** | Low-latency memory router & semantic context engine (~500 tok budget) | Rust, SQLite, HNSW FastEmbed | `agent-brain route_task`, `agent-brain add @skills`, `agent-brain briefing` |
+| **[`agent-brain`](https://github.com/autonomic-ai-dev/agent-brain)** | Low-latency memory router & semantic context engine (~500 tok budget) | Rust, SQLite, HNSW FastEmbed | `agent-brain route_task`, `agent-brain package add @skills`, `agent-brain briefing` |
 | **[`agent-spine`](https://github.com/autonomic-ai-dev/agent-spine)** | Deterministic YAML DAG workflow orchestrator with HITL approval gates | Rust, petgraph, tokio | `agent-spine run --meta "task"`, `agent-spine init --with @workflow` |
 | **[`agent-heart`](https://github.com/autonomic-ai-dev/agent-heart)** | API token budget guardrails, cost telemetry & scheduled memory GC | Rust, background daemon | `agent-heart status`, `agent-heart budget check`, `agent-heart gc` |
 | **[`agent-muscle`](https://github.com/autonomic-ai-dev/agent-muscle)** | Sandboxed command execution, WASM runtimes & LoRA fine-tuning backends | Rust, Wasmtime, Docker | `agent-muscle run`, `agent-muscle serve`, `agent-muscle train` |
@@ -168,10 +168,10 @@ Discover, install, and compose curated agent capabilities from the official regi
 agent-brain registry list
 
 # Install curated skill sets
-agent-brain add @official          # Official Anthropic & Copilot skills
-agent-brain add @nextjs            # Vercel React & Next.js agent patterns
-agent-brain add @coding-policy     # Strict inspect-test-verify policy
-agent-brain add @claude-skills     # Curated Claude code skill library
+agent-brain package add @official          # Official Anthropic & Copilot skills
+agent-brain package add @nextjs            # Vercel React & Next.js agent patterns
+agent-brain package add @coding-policy     # Strict inspect-test-verify policy
+agent-brain package add @claude-skills     # Curated Claude code skill library
 ```
 
 ---
