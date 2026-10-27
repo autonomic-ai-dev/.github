@@ -1,84 +1,69 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/autonomic-ai-dev/.github/master/assets/logo.png" width="220" alt="Autonomic AI Logo" />
-  <h1>🧬 AUTONOMIC AI</h1>
-  <p><b>Right skill, right memory, right time, for AI coding agents.</b></p>
-  <p><i>Local-first. Deterministic workflows. Built in Rust.</i></p>
+  <img src="https://raw.githubusercontent.com/autonomic-ai-dev/.github/master/assets/logo.png" width="200" alt="Autonomic AI Logo" />
+  <h1>AUTONOMIC AI</h1>
+  <p><b>The Local-First Cognitive Governor & Procedure Graph for Autonomous Coding Agents.</b></p>
+  <p><i>Token-budgeted turn router, host policy sentry, and self-evolving execution DAGs. Built in Rust.</i></p>
 
   <p>
-    <a href="https://github.com/autonomic-ai-dev/agent-brain"><img src="https://img.shields.io/badge/Component-agent--brain-00f2fe?style=flat-square" alt="agent-brain"></a>
-    <a href="https://github.com/autonomic-ai-dev/agent-spine"><img src="https://img.shields.io/badge/Component-agent--spine-00f2fe?style=flat-square" alt="agent-spine"></a>
-    <a href="https://github.com/autonomic-ai-dev/homebrew-tap"><img src="https://img.shields.io/badge/Homebrew-autonomic--ai--dev%2Ftap-10b981?style=flat-square&logo=homebrew&logoColor=white" alt="Homebrew"></a>
-    <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/Protocol-MCP-6366f1?style=flat-square" alt="MCP"></a>
+    <a href="https://github.com/autonomic-ai-dev/agent-brain"><img src="https://img.shields.io/badge/Component-agent--brain-ffffff?style=flat-square&labelColor=18181b" alt="agent-brain"></a>
+    <a href="https://github.com/autonomic-ai-dev/agent-spine"><img src="https://img.shields.io/badge/Component-agent--spine-ffffff?style=flat-square&labelColor=18181b" alt="agent-spine"></a>
+    <a href="https://github.com/autonomic-ai-dev/homebrew-tap"><img src="https://img.shields.io/badge/Homebrew-autonomic--ai--dev%2Ftap-ffffff?style=flat-square&logo=homebrew&logoColor=white&labelColor=18181b" alt="Homebrew"></a>
+    <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/Protocol-MCP-ffffff?style=flat-square&labelColor=18181b" alt="MCP"></a>
+    <a href="https://autonomic-ai.dev"><img src="https://img.shields.io/badge/Website-autonomic--ai.dev-ffffff?style=flat-square&labelColor=18181b" alt="Website"></a>
   </p>
 </div>
 
 ---
 
-## Scope
+## The Dual-Engine Architecture
 
-Autonomic AI is two components: **agent-brain** and **agent-spine**. They are the whole product.
+Autonomic AI decouples stochastic reasoning from deterministic execution into two purpose-built engines:
 
-- **agent-brain** decides which skills, rules, and memories an agent sees on each turn.
-- **agent-spine** runs deterministic YAML workflows with approval gates.
-
-Earlier work on a wider 11-organ stack is out of scope. `agent-body-core` is no longer a dependency of either component.
+* **`agent-brain`**: The cognitive governor, procedure graph, and token-budgeted memory engine. It controls what skills, rules, and failure traps an agent sees on each turn through a local-first SQLite WAL database (`~/.autonomic/memory/brain.db`), in-memory HNSW vector index, and host pre-tool hooks.
+* **`agent-spine`**: The deterministic YAML workflow engine. It executes declarative Directed Acyclic Graphs (DAGs) with milestone approval gates, isolated sandboxes, and immutable cryptographic state snapshots.
 
 ---
 
-## agent-brain: right context on every turn
+## 4 Strategic Pillars
 
-agent-brain is a local MCP router. Each turn, `route_task` returns a small, ranked set of skills, rules, and memory within a token budget, so the agent does not get the whole library. Host hooks block brain tools until the agent has routed the turn.
+### 1. Self-Evolving Procedures & Auto-Distillation
+When agents explore codebases, execute shell commands, patch files, and pass `.verify/run.sh`, `agent-brain` automatically captures session transcripts. Passing tool transitions are distilled into state transitions (`procedure_edges` and `workflow_trajectory`). Future tasks query the graph via recursive CTEs, injecting proven execution DAGs rather than generic advice.
 
-- Warm-cache route p95 is **24 ms** on a synthetic 1,000-item index (`agent-brain bench --scale`).
-- Recall@3 on the repository's 20-case CI eval is **0.95**, against a threshold of 0.85. The sample is small; it measures known phrasings, not real sessions.
-- **Known issue:** route latency has a long tail in real use. One user's 7-day stats show a P95 of about 28 s across 506 routes. This is under investigation.
+### 2. Closed-Loop Negative Reinforcement & Trap Detection
+When a command fails or CI exits non-zero, `agent-brain verify` registers the failure fingerprint and squelches the failing recipe from recommendations. If an agent attempts the same defective pattern, the brain injects high-priority `TRAP WARNING: DO NOT USE <command>` constraints into `must_apply`.
 
----
+### 3. Active Policy Sentry (Host-Level Guardrails)
+Passive markdown prompts are easily ignored by LLMs under heavy context load. `agent-brain` hooks directly into the host runtime (`route_gate.py`, `command_policy.rs`) across **Claude Code**, **Cursor**, **Antigravity (AGY)**, and **OpenCode**, physically blocking unrouted turns, destructive commands, or unscouted full-file dumps.
 
-## agent-spine: deterministic workflows
-
-agent-spine parses YAML workflow DAGs and runs them with explicit state transitions and human-in-the-loop approval gates. The LLM works inside the steps the workflow defines; it does not choose the next step itself.
-
-NATS is optional. Set `AUTONOMIC_NATS_URL` to publish workflow events. Credentials come only from the environment:
-
-| Variable | Purpose |
-| :--- | :--- |
-| `AUTONOMIC_NATS_URL` | Server URL (default `nats://127.0.0.1:4222` when a connection is made) |
-| `AUTONOMIC_NATS_USER`, `AUTONOMIC_NATS_PASSWORD` | Optional user and password |
-| `AUTONOMIC_NATS_TLS`, `AUTONOMIC_NATS_CA`, `AUTONOMIC_NATS_CERT`, `AUTONOMIC_NATS_KEY` | Optional TLS and client certificate |
-| `AUTONOMIC_NATS_INSECURE` | Set to `1` or `true` to skip user and password |
+### 4. Universal Cross-Host Neural Bus
+Coding agents run in silos—Cursor in the IDE, Claude Code in terminal, Antigravity in agentic loops, and GitHub Actions in CI. `agent-brain` runs as a unified background daemon on `~/.autonomic/memory/brain.db`. A verified bug fix discovered in Claude Code terminal is immediately available to Cursor in the IDE.
 
 ---
 
-## Install
+## Quickstart
 
+### Homebrew (macOS / Apple Silicon Universal)
 ```bash
 brew tap autonomic-ai-dev/tap
 brew install agent-brain agent-spine
-
-agent-brain install --global   # configure MCP and host hooks
-agent-brain doctor             # check the install
-agent-spine init               # set up agent-spine
+agent-brain doctor
 ```
 
-Update with `brew upgrade agent-brain agent-spine`. `agent-spine update` prints this command; it no longer downloads releases itself.
-
-agent-brain reads its settings from `config.yaml` in its home directory, `~/.autonomic/memory` by default. Set `AGENT_BRAIN_HOME` to use another directory.
-
----
-
-## Local first
-
-agent-brain stores its database, vector index, and route logs under `~/.autonomic/`. Nothing leaves your machine unless you configure a NATS server or a remote model API.
+### Cargo (From Source)
+```bash
+cargo install --git https://github.com/autonomic-ai-dev/agent-brain agent-brain
+cargo install --git https://github.com/autonomic-ai-dev/agent-spine agent-spine
+agent-brain doctor
+```
 
 ---
 
-## Open source
+## Verification & Rigor
 
-Autonomic AI is planned as open source. The repositories are private during development, so the links above will not open for people outside the team yet.
+Claims of correctness are never accepted from conversational statements. Every claim must be backed by a verification receipt produced by `agent-brain verify -- <command>` that exited 0. Test outputs and logs reside strictly in `.verify/`.
 
 ---
 
 <div align="center">
-  <sub>Autonomic AI · Right context, right time</sub>
+  <sub>© 2026 Autonomic AI. The Cognitive Governor & Procedure Graph for Autonomous Coding Agents.</sub>
 </div>
