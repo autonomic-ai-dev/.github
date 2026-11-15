@@ -2,11 +2,11 @@
   <img src="https://raw.githubusercontent.com/autonomic-ai-dev/.github/master/assets/logo.png" width="200" alt="Autonomic AI Logo" />
   <h1>AUTONOMIC AI</h1>
   <p><b>Proof and workflow tools for autonomous coding agents.</b></p>
-  <p><i>Allowlisted checks recorded as receipts, host gates that stop unverified claims, and deterministic YAML workflows. Built in Rust.</i></p>
+  <p><i>Allowlisted checks recorded as receipts, host gates that stop unverified claims, and deterministic workflow DAGs. Built in Rust.</i></p>
 
   <p>
     <a href="https://github.com/autonomic-ai-dev/tekmor"><img src="https://img.shields.io/badge/Component-tekmor-ffffff?style=flat-square&labelColor=18181b" alt="tekmor"></a>
-    <a href="https://github.com/autonomic-ai-dev/agent-spine"><img src="https://img.shields.io/badge/Component-agent--spine-ffffff?style=flat-square&labelColor=18181b" alt="agent-spine"></a>
+    <a href="https://github.com/autonomic-ai-dev/thesmos"><img src="https://img.shields.io/badge/Component-thesmos-ffffff?style=flat-square&labelColor=18181b" alt="thesmos"></a>
     <a href="https://github.com/autonomic-ai-dev/homebrew-tap"><img src="https://img.shields.io/badge/Homebrew-autonomic--ai--dev%2Ftap-ffffff?style=flat-square&logo=homebrew&logoColor=white&labelColor=18181b" alt="Homebrew"></a>
     <a href="https://crates.io/crates/tekmor"><img src="https://img.shields.io/badge/crates.io-tekmor-ffffff?style=flat-square&labelColor=18181b" alt="crates.io"></a>
     <a href="https://autonomic-ai.dev"><img src="https://img.shields.io/badge/Website-autonomic--ai.dev-ffffff?style=flat-square&labelColor=18181b" alt="Website"></a>
@@ -20,7 +20,7 @@
 Autonomic AI keeps proof and execution apart. Each tool installs and runs without the other:
 
 * **`tekmor`** (v1.0.0): A proof eval for coding agents. It runs the commands your project allows, records each outcome against the commit and code it ran on, and writes a receipt. Claude Code hooks block a turn that claims a pass without a PASSED receipt, and block risky shell commands.
-* **`agent-spine`**: The deterministic YAML workflow engine. It executes declarative Directed Acyclic Graphs (DAGs) with approval gates, isolated sandboxes, and a snapshot after every step.
+* **`thesmos`**: A deterministic YAML workflow engine. It runs declarative Directed Acyclic Graphs (DAGs) with verify steps, approval gates and a snapshot of every step. It was previously named `agent-spine`.
 
 ---
 
@@ -45,8 +45,13 @@ Autonomic AI keeps proof and execution apart. Each tool installs and runs withou
 ### Homebrew (macOS, Apple Silicon)
 ```bash
 brew tap autonomic-ai-dev/tap
-brew install tekmor agent-spine
+brew install tekmor
 tekmor install
+```
+
+thesmos is distributed from the same tap as the `agent-spine` formula until the formula is renamed:
+```bash
+brew install agent-spine
 ```
 
 ### Cargo
